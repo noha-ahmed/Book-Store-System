@@ -12,4 +12,5 @@ public class UserBasicInfo {
     private String email;
     private String phoneNumber;
     private String shippingAddress;
+    private int privilege;
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+
 @Data
 public class Book {
 
@@ -15,6 +16,6 @@ public class Book {
     private Publisher publisher;
     private Category category;
     private List<Author> authors;
-    private Date publicationDate;
+    private String publicationDate;
 
 }

@@ -2,6 +2,8 @@ package Models;
 
 import lombok.Data;
 
+import java.sql.SQLException;
+
 @Data
 public class User {
 
@@ -14,5 +16,15 @@ public class User {
     private String phoneNumber;
     private String shippingAddress;
     private Cart shoppingCart;
+
+    public void editPersonalInfo(UserBasicInfo user) throws SQLException {
+        BookStore.databaseManager.executeQuery("UPDATE USER SET UserName = '" + user.getUsername()
+                + "',Password = '" + user.getPassword() + "',First_Name = '" + user.getFirstName() + "',Last_Name = '" + user.getLastName() + "',Email = '" + user.getEmail() +
+                "',Phone_Number = '" + user.getPhoneNumber() + "',Shipping_Address = '" + user.getShippingAddress() + "',privilege = " + user.getPrivilege() +
+                " WHERE User_id = " + user.getId());
+    }
+
+
+
 
 }
