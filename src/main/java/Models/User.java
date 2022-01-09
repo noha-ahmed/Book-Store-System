@@ -1,8 +1,13 @@
 package Models;
 
+import Mappers.BookMapper;
 import lombok.Data;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Data
 public class User {
@@ -24,7 +29,64 @@ public class User {
                 " WHERE User_id = " + user.getId());
     }
 
+    public List<Book> getByTitle(String title) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Title(" + "'" + title + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
 
+    }
+
+    public List<Book> getByISBN(String ISBN) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_ISBN(" + "'" + ISBN + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
+    }
+
+    public List<Book> getByPublisherName(String publisherName) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Publisher(" + "'" + publisherName + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
+
+    }
+
+    public List<Book> getByAuthor(String authorName) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Author(" + "'" + authorName + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
+
+    }
+
+    public List<Book> getByCategory(String category) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Category(" + "'" + category + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
+
+    }
+
+    public List<Book> getByPublicationDate(String publicationYear) throws SQLException {
+        List<Book> books = new ArrayList<>();
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Publication_year(" + "'" +publicationYear + "'" + ")");
+        while (resultSet.next()) {
+            books.add(BookMapper.toBook(resultSet));
+        }
+        return books;
+
+    }
 
 
 }

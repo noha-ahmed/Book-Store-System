@@ -9,6 +9,4 @@ public class Author {
 
     private String name;
     private List<Book> bookList;
-    private String address;
-
 }

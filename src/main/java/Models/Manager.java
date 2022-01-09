@@ -1,10 +1,11 @@
 package Models;
 
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Manager extends User {
+public class Manager extends User  {
 
     public boolean promoteUser(int UserId) {
         return false;
@@ -12,10 +13,12 @@ public class Manager extends User {
 
     public void addNewBook(Book book) throws SQLException {
 
-        BookStore.databaseManager.executeQuery("INSERT INTO BOOK VALUES('" + book.getISBN()
+        BookStore.databaseManager.executeQuery("CALL add_Book(' " + book.getISBN()
                 + "','" + book.getTitle() + "','" + book.getPublicationDate() + "','" + book.getPrice() + "','" + book.getCategory() +
                 "','" + book.getNumberOfCopies() + "','" + book.getThreshold() + "','" + book.getPublisher().getName() +
                 "')");
+
+
     }
 
 
@@ -23,6 +26,16 @@ public class Manager extends User {
         BookStore.databaseManager.executeQuery("UPDATE BOOK SET title = '" + book.getTitle() + "',Publication_Year = '" + book.getPublicationDate() + "',Selling_Price = '" + book.getPrice() + "',Category = '" + book.getCategory() +
                 "',Quantity = '" + book.getNumberOfCopies() + "',Threshold = '" + book.getThreshold() + "',Publisher_Name = '" + book.getPublisher().getName() + "' WHERE ISBN = " + book.getISBN()
         );
+    }
+
+    public static ResultSet viewPublisherByName(String name) throws SQLException {
+
+        return BookStore.databaseManager.executeQuery("CALL get_Book_Publisher('" + name + "')");
+
+    }
+
+    public  static  ResultSet getBookAuthors(String ISBN) throws SQLException {
+        return BookStore.databaseManager.executeQuery("CALL get_Book_Authors('"+ISBN+"')");
     }
 
 
