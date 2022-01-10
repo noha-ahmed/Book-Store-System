@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class UserBasicInfo {
-    private int id;
     private String username;
     private String password;
     private String firstName;
@@ -12,5 +11,5 @@ public class UserBasicInfo {
     private String email;
     private String phoneNumber;
     private String shippingAddress;
-    private int privilege;
+    private boolean privilege;
 }

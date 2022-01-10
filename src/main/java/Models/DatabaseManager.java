@@ -5,7 +5,7 @@ import java.sql.*;
 public class DatabaseManager {
 
     static private DatabaseManager instance;
-    private final String url = "jdbc:mysql://localhost:3306/bookstore";
+    private final String url = "jdbc:mysql://localhost:3306/bookstore?autoReconnect=true&useSSL=false";
     private final String userName;
     private final String password;
     private Connection connection;

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Manager extends User {
+public class Manager {
 
     public void promoteUser(String userName) throws SQLException {
         BookStore.databaseManager.executeQuery("UPDATE USER SET privilege = '1' WHERE UserName = '" + userName + "'");
@@ -35,10 +35,12 @@ public class Manager extends User {
         return true;
     }
 
+    public void confirmOrder(int orderID) throws SQLException {
+        BookStore.databaseManager.executeQuery("CALL confirm_Book_Store_Order('" + orderID + "')");
+    }
+
     public static ResultSet viewPublisherByName(String name) throws SQLException {
-
         return BookStore.databaseManager.executeQuery("CALL get_Book_Publisher('" + name + "')");
-
     }
 
     public static ResultSet getBookAuthors(String ISBN) throws SQLException {
