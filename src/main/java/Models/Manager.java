@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Manager {
+public class Manager{
+
 
     public void promoteUser(String userName) throws SQLException {
         BookStore.databaseManager.executeQuery("UPDATE USER SET privilege = '1' WHERE UserName = '" + userName + "'");
