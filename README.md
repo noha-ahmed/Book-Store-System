@@ -1,7 +1,7 @@
 # Book-Store-System
-A Book Store managing system supporting multiple users, Customers and Managers.
-All users can view the books in the book store, search for a certain book using different attributes (ISBN, Title, Publisher, Author ....), and order books.
-Managers can manage the book store by : 
+A Book Store managing system supporting multiple users, Customers and Managers. <br />
+All users can view the books in the book store, search for a certain book using different attributes (ISBN, Title, Publisher, Author ....), and order books. <br />
+Managers can manage the book store by : <br />
                                       - confirming the book store orders for books from publishers
                                       - add and modify books
                                       - promote system Customers to a manager
