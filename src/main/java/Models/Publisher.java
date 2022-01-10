@@ -12,5 +12,4 @@ public class Publisher {
     private String address;
     private String telephoneNumbers;
 
-
 }

@@ -1,4 +1,6 @@
 package Models;
+import net.sf.jasperreports.engine.JRException;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +9,7 @@ import java.util.List;
 
 
 public class Test {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, JRException {
 
 //        Manager manager = new Manager();
 ////        manager.addNewBook(book);
@@ -32,8 +34,9 @@ public class Test {
 //        }
 //        System.out.println(new Date().before(time));
 
-//        Manager manager = new Manager();
-//        manager.confirmOrder(1);
+        Manager manager = new Manager("asmaa","s","s","a","e","01","w",true,null);
+        manager.totalSalesValueLastMonthReport();
+
 
     }
 
