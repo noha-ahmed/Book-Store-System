@@ -32,6 +32,8 @@ public class User {
 //    }
 
     public void addToCart(Book book) {
+        if( shoppingCart == null )
+            shoppingCart = new Cart();
         shoppingCart.addBook(book);
     }
 
@@ -73,6 +75,7 @@ public class User {
                 }
             }
         }
+        shoppingCart = new Cart();
         return true;
     }
 
@@ -91,6 +94,48 @@ public class User {
             return true;
         else
             return false;
+    }
+
+    private void updateUser(UserBasicInfo user) {
+        username = user.getUsername();
+        firstName = user.getFirstName();
+        lastName = user.getLastName();
+        email = user.getEmail();
+        password = user.getPassword();
+        shippingAddress = user.getShippingAddress();
+        phoneNumber = user.getPhoneNumber();
+    }
+
+    public int editPersonalInfo(UserBasicInfo user) throws SQLException {
+
+        System.out.println(user.getUsername());
+        ResultSet usernameResult = BookStore.databaseManager.executeQuery("CALL get_User('" + user.getUsername() + "')");
+        if (usernameResult.next() && (!username.equals(user.getUsername()))) {
+            System.out.println(usernameResult.getNString("UserName"));
+            return ErrorCodes.USERNAME_EXISTS.getCode();
+        }
+        ResultSet emailResult = BookStore.databaseManager.executeQuery("CALL get_User_Email('" + user.getEmail() + "')");
+        if (emailResult.next() &&(!email.equals(user.getEmail()))) return ErrorCodes.EMAIL_EXISTS.getCode();
+
+        System.out.println(username);
+        BookStore.databaseManager.executeQuery("CALL update_User('" + username + "','"
+                + user.getUsername() + "','" + user.getPassword() + "','"
+                + user.getFirstName() + "','" + user.getLastName() + "','"
+                + user.getEmail() + "','" + user.getPhoneNumber() + "','" + user.getShippingAddress() + "')");
+        updateUser(user);
+
+        return ErrorCodes.CORRECT_USER.getCode();
+    }
+
+    public UserBasicInfo getInfo(){
+        return UserBasicInfo.builder().email(email)
+                .firstName(firstName)
+                .lastName(lastName)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .username(username)
+                .shippingAddress(shippingAddress)
+                .build();
     }
 
 

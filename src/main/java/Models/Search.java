@@ -1,3 +1,5 @@
+package Models;
+
 import Mappers.BookMapper;
 import Models.Book;
 import Models.BookStore;
@@ -22,7 +24,7 @@ public class Search {
             return getByCategory(input);
         else if(type.equalsIgnoreCase("Date"))
             return getByPublicationDate(input);
-        return null;
+        return new ArrayList<>();
     }
 
     private static List<Book> getByTitle(String title) throws SQLException {

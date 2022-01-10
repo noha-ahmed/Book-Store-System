@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="beige" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ModifyBookController">
+   <children>
+      <Pane prefHeight="55.0" prefWidth="987.0" styleClass="brown" stylesheets="@application.css">
+         <children>
+            <Button layoutX="800.0" layoutY="9.0" mnemonicParsing="false" onAction="#logOut" styleClass="beige-tranparent-btn" text="log out" textFill="#fffefe" underline="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label fx:id="pageTitle" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="28.0" prefWidth="113.0" styleClass="creamy-label" text="Add Books">
+               <font>
+                  <Font name="System Bold Italic" size="19.0" />
+               </font>
+            </Label>
+            <Button layoutX="673.0" layoutY="9.0" mnemonicParsing="false" onAction="#viewHome" styleClass="beige-tranparent-btn" text="Home" textFill="#fffefe" underline="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+         </children></Pane>
+      <ImageView fitHeight="559.0" fitWidth="416.0" layoutX="571.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pics/books3.jpg" />
+         </image>
+      </ImageView>
+      <Pane fx:id="bookPaneUserHome" layoutX="35.0" layoutY="77.0" prefHeight="500.0" prefWidth="494.0" styleClass="creamy-card" stylesheets="@application.css">
+         <children>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="79.0" prefHeight="25.0" prefWidth="69.0" styleClass="brown-label" text="ISBN:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ISBNField" alignment="CENTER" layoutX="121.0" layoutY="78.0" prefHeight="27.0" prefWidth="122.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font></TextField>
+            <Label alignment="CENTER" layoutX="24.0" layoutY="140.0" prefHeight="25.0" prefWidth="77.0" styleClass="brown-label" text="Author(s)">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="29.0" layoutY="292.0" prefHeight="25.0" prefWidth="69.0" styleClass="brown-label" text="Publisher">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="publisherField" alignment="CENTER" layoutX="116.0" layoutY="292.0" prefHeight="27.0" prefWidth="101.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Label alignment="CENTER" layoutX="236.0" layoutY="292.0" prefHeight="27.0" prefWidth="113.0" styleClass="brown-label" text="Publication">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="pubYearField" alignment="CENTER" layoutX="360.0" layoutY="293.0" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Label alignment="CENTER" layoutX="142.0" layoutY="398.0" prefHeight="27.0" prefWidth="113.0" styleClass="brown-label" text="Price">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="priceField" alignment="CENTER" layoutX="263.0" layoutY="398.0" prefHeight="27.0" prefWidth="72.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Button layoutX="182.0" layoutY="446.0" mnemonicParsing="false" onAction="#saveBook" prefHeight="28.0" prefWidth="130.0" styleClass="brown-button" text="Save Book" textFill="#fff9f2" />
+            <Label alignment="CENTER" layoutX="9.0" layoutY="348.0" prefHeight="27.0" prefWidth="113.0" styleClass="brown-label" text="Quantity">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="quantityField" alignment="CENTER" layoutX="120.0" layoutY="349.0" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Label alignment="CENTER" layoutX="20.0" layoutY="32.0" prefHeight="25.0" prefWidth="69.0" styleClass="brown-label" text="Title">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+                         <ListView fx:id="authorsListView" layoutX="134.0" layoutY="140.0" prefHeight="85.0" prefWidth="205.0" style="-fx-background-color:F8F0E3EF; -fx-border-color: #6e4325; -fx-border-radius: 5;" />
+            <TextField fx:id="titleField" alignment="CENTER" layoutX="152.0" layoutY="31.0" prefHeight="27.0" prefWidth="302.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+
+            <Label alignment="CENTER" layoutX="268.0" layoutY="79.0" prefHeight="25.0" prefWidth="69.0" styleClass="brown-label" text="Category">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="categoryField" alignment="CENTER" layoutX="351.0" layoutY="78.0" prefHeight="27.0" prefWidth="113.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="authorField" alignment="CENTER" layoutX="134.0" layoutY="237.0" prefHeight="27.0" prefWidth="205.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+            <Button layoutX="346.0" layoutY="231.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="38.0" prefWidth="83.0" styleClass="brown-tranparent-btn" text="Add" textFill="#fff9f2" underline="true" />
+            <Button layoutX="327.0" layoutY="134.0" mnemonicParsing="false" onAction="#deleteAuthor" prefHeight="38.0" prefWidth="122.0" styleClass="brown-tranparent-btn" text="Delete" textFill="#fff9f2" underline="true" />
+            <Label alignment="CENTER" layoutX="236.0" layoutY="308.0" prefHeight="27.0" prefWidth="113.0" styleClass="brown-label" text="Year">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="240.0" layoutY="349.0" prefHeight="27.0" prefWidth="113.0" styleClass="brown-label" text="Threshold">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="thresholdField" alignment="CENTER" layoutX="360.0" layoutY="349.0" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-border-color: #6e4225; -fx-border-radius: 5;">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </TextField>
+         </children>
+         <effect>
+            <DropShadow color="#837c7c" height="45.88" offsetX="-3.0" offsetY="3.0" radius="29.4375" width="73.87" />
+         </effect>
+      </Pane>
+   </children>
+</AnchorPane>

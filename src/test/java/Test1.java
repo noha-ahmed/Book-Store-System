@@ -1,6 +1,7 @@
 import Models.Book;
 import Models.BookStore;
 import Models.ErrorCodes;
+import Models.Search;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,17 +1,20 @@
 package Models;
 
 import Mappers.BookMapper;
+import Mappers.PublisherMapper;
 import Mappers.UserMapper;
 import lombok.Data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class BookStore {
-    public static final DatabaseManager databaseManager = DatabaseManager.getInstance("root", "root");
+    public static final DatabaseManager databaseManager = DatabaseManager.getInstance("root", "@mysqlNoha117");
     private User user;
 
     public int signIn(String username, String password) throws SQLException {
@@ -66,6 +69,104 @@ public class BookStore {
             allBooks.add(BookMapper.toBook(resultSet));
         }
         return allBooks;
+    }
+
+    public boolean isManager(){
+        return this.user.isPrivilege();
+    }
+
+    public List<Book> search(String type, String input){
+        try {
+            return Search.search(type, input);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
+    public void addToCart(Book book){
+        user.addToCart(book);
+    }
+
+    public Map<Book,Integer> viewCart(){
+        return user.viewCart();
+    }
+
+    public UserBasicInfo getProfile(){
+        return  user.getInfo();
+    }
+
+    public int editProfile(UserBasicInfo userBasicInfo){
+        try {
+            return user.editPersonalInfo(userBasicInfo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ErrorCodes.SQL_ERROR.getCode();
+    }
+
+    public double getCartTotalPrice(){
+        return user.getShoppingCart().getTotalPrice();
+    }
+
+    public void removeFromCart(Book book){
+        user.removeFromCart(book);
+    }
+
+    public boolean checkOutCart(String creditCardNumber, Date expiryDate){
+        try {
+            return user.checkOut(creditCardNumber,expiryDate);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void addBook(Book book, String publisherName) throws SQLException {
+        book.setPublisher(PublisherMapper.toPublisher(Manager.viewPublisherByName(publisherName)));
+        Manager manager = (Manager)user;
+        manager.addNewBook(book);
+        for(String author : book.getAuthors()){
+            databaseManager.executeQuery("CALL add_Author('" + author + "','"
+                    + book.getISBN() + "')");
+        }
+    }
+
+    public List<String[]> getAllUsers() throws SQLException {
+        ResultSet users = databaseManager.executeQuery("CALL get_User_by_privilege()");
+        List<String[]> usersInfo = new ArrayList<>();
+        while (users.next()){
+            String[] info = new String[2];
+            info[0] = users.getNString("UserName");
+            info[1] = users.getNString("Email");
+            usersInfo.add(info);
+        }
+        return usersInfo;
+    }
+
+    public void promoteUser(String userName) throws SQLException {
+        Manager manager = (Manager)user;
+        manager.promoteUser(userName);
+    }
+
+
+    public void confirmStoreOrder(int orderID) throws SQLException {
+        Manager manager = (Manager)user;
+        manager.confirmOrder(orderID);
+    }
+
+    public List<String[]> getOrders() throws SQLException {
+        ResultSet orders = databaseManager.executeQuery("CALL get_Book_Store_Orders()");
+        List<String[]> orderInfo = new ArrayList<>();
+        while (orders.next()){
+            String[] info = new String[4];
+            info[0] = String.valueOf(orders.getInt("Order_ID"));
+            info[1] = String.valueOf(orders.getInt("Quantity"));
+            info[2] = orders.getNString("ISBN");
+            info[3] = orders.getNString("Title");
+            orderInfo.add(info);
+        }
+        return orderInfo;
     }
 
 

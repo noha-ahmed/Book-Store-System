@@ -4,13 +4,10 @@ package Models;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.view.JasperViewer;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 public class Manager extends User {
@@ -101,7 +98,7 @@ public class Manager extends User {
      */
     public void top5PrevMonthCustomersReport() throws JRException {
         JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/Top5Customer.jasper", null, BookStore.databaseManager.getConnection());
-        JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
         jasperViewer.setVisible(true);
     }
 
@@ -113,7 +110,7 @@ public class Manager extends User {
     public void bestSellerBooksReport() throws JRException {
 
         JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/Top10Book.jasper", null, BookStore.databaseManager.getConnection());
-        JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
         jasperViewer.setVisible(true);
 
     }
@@ -121,7 +118,7 @@ public class Manager extends User {
     public void totalBookSalesLastMonthReport() throws JRException {
 
         JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/TotalSalesBooks.jasper", null, BookStore.databaseManager.getConnection());
-        JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
         jasperViewer.setVisible(true);
 
     }
@@ -129,7 +126,7 @@ public class Manager extends User {
     public void totalSalesValueLastMonthReport() throws JRException {
 
         JasperPrint jasperPrint = JasperFillManager.fillReport("src/main/resources/TotalSales.jasper", null, BookStore.databaseManager.getConnection());
-        JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+        JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
         jasperViewer.setVisible(true);
 
     }

@@ -1,0 +1,66 @@
+.beige{
+    -fx-background-color: #ece4d7;
+}
+.beige2{
+    -fx-background-color: #efe6d6;
+}
+.brown{
+    -fx-background-color: #6e4325;
+}
+.creamy{
+    -fx-background-color: rgba(248, 240, 227, 0.94);
+    -fx-background-radius: 25;
+}
+.light{
+    -fx-background-color: #F8F0E3F0;
+}
+.darkBeige{
+    -fx-background-color: #ddcbb3;
+}
+.brown-label{
+    -fx-text-fill: #6e4225;
+}
+.creamy-label{
+    -fx-text-fill: rgba(248, 240, 227, 0.94);
+}
+.creamy-title{
+    -fx-text-fill: rgba(248, 240, 227, 0.94);
+    -fx-font-size: 20 ;
+}
+.creamy-text-field {
+    -fx-background-color: rgba(248, 240, 227, 0.94);
+    -fx-prompt-text-fill: #6e4225;
+}
+.beige-tranparent-btn{
+    -fx-text-fill: rgba(248, 240, 227, 0.94);
+    -fx-font-size: 17;
+    -fx-background-color: transparent;
+}
+.brown-tranparent-btn{
+    -fx-text-fill: #6e4225;
+    -fx-font-size: 15;
+    -fx-background-color: transparent;
+}
+.brown-button{
+    -fx-background-color: #6e4225;
+    -fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-border-color: #6e4325;
+}
+.creamy-card{
+    -fx-background-color: rgba(248, 240, 227, 0.94);
+    -fx-background-radius: 25;
+    -fx-border-color: #6e4325;
+    -fx-border-radius: 25;
+ }
+.text-field:disabled, .text-field:disabled > * {
+    -fx-opacity: 1.0 ;
+}
+.list-view .list-cell:even {
+    -fx-background-color: #dad0bc;
+    -fx-text-fill: #6e4225;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: rgba(248, 240, 227, 0.94);
+    -fx-text-fill: #6e4225;
+}
