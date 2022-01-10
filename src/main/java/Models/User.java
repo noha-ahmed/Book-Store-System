@@ -2,7 +2,6 @@ package Models;
 
 import Mappers.BookMapper;
 import lombok.Data;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private String shippingAddress;
-    private Cart shoppingCart;
+    private Cart shoppingCart = new Cart();
 
     public void editPersonalInfo(UserBasicInfo user) throws SQLException {
         BookStore.databaseManager.executeQuery("UPDATE USER SET UserName = '" + user.getUsername()
@@ -80,11 +79,53 @@ public class User {
 
     public List<Book> getByPublicationDate(String publicationYear) throws SQLException {
         List<Book> books = new ArrayList<>();
-        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Publication_year(" + "'" +publicationYear + "'" + ")");
+        ResultSet resultSet = BookStore.databaseManager.executeQuery("CALL search_By_Publication_year(" + "'" + publicationYear + "'" + ")");
         while (resultSet.next()) {
             books.add(BookMapper.toBook(resultSet));
         }
         return books;
+
+    }
+
+    public void addToCart(Book book) {
+        shoppingCart.addBook(book);
+    }
+
+    public void removeFromCart(Book book) {
+        shoppingCart.removeBook(book);
+    }
+
+    public Map<Book,Integer> viewCart() {
+        return shoppingCart.getBooks();
+    }
+
+    public double getTotalCartPrice() {
+        return shoppingCart.getTotalPrice();
+    }
+
+    public boolean placeOrder()
+    {
+        for( Map.Entry<Book,Integer> m : shoppingCart.getBooks().entrySet())
+        {
+            m.getKey();
+            m.getValue();
+        }
+        shoppingCart.getBooks().forEach((key, value) ->
+        {
+            try {
+                BookStore.databaseManager.executeQuery("CALL add_Customer_Order('"
+                        + username + "','"
+                        + key.getISBN() + "',"
+                        + value + ","
+                        + (value *key.getPrice()) + ")");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        return true;
+    }
+    private void addItem()
+    {
 
     }
 

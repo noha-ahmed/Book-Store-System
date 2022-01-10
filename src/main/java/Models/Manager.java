@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class Manager extends User  {
+public class Manager extends User {
 
-    public boolean promoteUser(int UserId) {
-        return false;
+    public void promoteUser(String userName) throws SQLException {
+        BookStore.databaseManager.executeQuery("UPDATE USER SET privilege = '1' WHERE UserName = '" + userName + "'");
     }
 
     public void addNewBook(Book book) throws SQLException {
@@ -22,10 +22,17 @@ public class Manager extends User  {
     }
 
 
-    public void modifyBook(Book book) throws SQLException {
-        BookStore.databaseManager.executeQuery("UPDATE BOOK SET title = '" + book.getTitle() + "',Publication_Year = '" + book.getPublicationDate() + "',Selling_Price = '" + book.getPrice() + "',Category = '" + book.getCategory() +
-                "',Quantity = '" + book.getNumberOfCopies() + "',Threshold = '" + book.getThreshold() + "',Publisher_Name = '" + book.getPublisher().getName() + "' WHERE ISBN = " + book.getISBN()
-        );
+    public boolean modifyBook(Book book) throws SQLException {
+        try {
+            BookStore.databaseManager.executeQuery("UPDATE BOOK SET Title = '" + book.getTitle() + "',Publication_Year = '" + book.getPublicationDate() + "',Selling_Price = '" + book.getPrice() + "',Category = '" + book.getCategory() +
+                    "',Copies = '" + book.getNumberOfCopies() + "',Threshold = '" + book.getThreshold() + "',Publisher_Name = '" + book.getPublisher().getName() + "' WHERE ISBN = '" + book.getISBN() + "'"
+            );
+
+        } catch (SQLException e) {
+            if (e.getMessage().equals("Book out of stock"))
+                return false;
+        }
+        return true;
     }
 
     public static ResultSet viewPublisherByName(String name) throws SQLException {
@@ -34,8 +41,8 @@ public class Manager extends User  {
 
     }
 
-    public  static  ResultSet getBookAuthors(String ISBN) throws SQLException {
-        return BookStore.databaseManager.executeQuery("CALL get_Book_Authors('"+ISBN+"')");
+    public static ResultSet getBookAuthors(String ISBN) throws SQLException {
+        return BookStore.databaseManager.executeQuery("CALL get_Book_Authors('" + ISBN + "')");
     }
 
 
@@ -53,6 +60,7 @@ public class Manager extends User  {
      * @return
      */
     public List<User> getTop5PrevMonth() {
+
         return null;
     }
 
